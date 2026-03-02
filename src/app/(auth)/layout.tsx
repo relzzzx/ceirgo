@@ -13,29 +13,21 @@ export default function AuthLayout({ children }: { children: React.ReactNode }) 
         if (hasChecked.current) return;
         hasChecked.current = true;
 
-        console.log('[Auth Layout] Checking session...');
-
         const checkSession = async () => {
             try {
                 const { data: { session }, error } = await supabase.auth.getSession();
                 
-                console.log('[Auth Layout] Session check result:', { hasSession: !!session, error });
-                
                 if (error) {
-                    console.error("Auth session error:", error);
                     setChecking(false);
                     return;
                 }
 
                 if (session) {
-                    console.log('[Auth Layout] User logged in, redirecting to dashboard');
                     router.replace("/dashboard");
                 } else {
-                    console.log('[Auth Layout] No session, allowing auth pages');
                     setChecking(false);
                 }
-            } catch (err) {
-                console.error("Failed to check auth session:", err);
+            } catch {
                 setChecking(false);
             }
         };

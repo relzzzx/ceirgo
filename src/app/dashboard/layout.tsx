@@ -17,38 +17,24 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
         if (hasChecked.current) return;
         hasChecked.current = true;
 
-        console.log('[Dashboard Layout] Starting session check...');
-
         const checkSession = async () => {
             try {
-                console.log('[Dashboard Layout] Calling getSession...');
                 const { data: { session }, error } = await supabase.auth.getSession();
                 
-                console.log('[Dashboard Layout] getSession result:', { 
-                    hasSession: !!session, 
-                    error,
-                    userEmail: session?.user?.email 
-                });
-                
                 if (error) {
-                    console.error('[Dashboard Layout] Session error:', error);
                     router.replace("/login");
                     return;
                 }
 
                 if (!session) {
-                    console.log('[Dashboard Layout] No session, redirecting to login');
                     router.replace("/login");
                     return;
                 }
 
-                console.log('[Dashboard Layout] Session valid, setting email and checking admin...');
                 setEmail(session.user.email ?? null);
                 setUserIsAdmin(isAdmin(session.user.email));
-                console.log('[Dashboard Layout] Done, setting loading to false');
                 setLoading(false);
-            } catch (err) {
-                console.error("[Dashboard Layout] Error:", err);
+            } catch {
                 router.replace("/login");
             }
         };

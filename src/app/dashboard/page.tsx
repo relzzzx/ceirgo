@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import Link from "next/link";
 import { supabase } from "@/lib/supabase";
 
@@ -48,11 +48,7 @@ export default function DashboardPage() {
     const [loading, setLoading] = useState(true);
     const [activeTab, setActiveTab] = useState<"active" | "history">("active");
 
-    useEffect(() => {
-        fetchOrders();
-    }, []);
-
-    const fetchOrders = async () => {
+    const fetchOrders = useCallback(async () => {
         const { data, error } = await supabase
             .from("orders")
             .select("*")
@@ -62,7 +58,12 @@ export default function DashboardPage() {
             setOrders(data);
         }
         setLoading(false);
-    };
+    }, []);
+
+    useEffect(() => {
+        // eslint-disable-next-line react-hooks/set-state-in-effect
+        fetchOrders();
+    }, [fetchOrders]);
 
     const activeOrders = orders.filter(o => !["Ditolak"].includes(o.status));
     const historyOrders = orders.filter(o => ["Ditolak"].includes(o.status) || o.status === "Aktif");

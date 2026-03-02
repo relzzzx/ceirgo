@@ -12,29 +12,21 @@ export default function Home() {
     if (hasChecked.current) return;
     hasChecked.current = true;
 
-    console.log('[Home] Checking session...');
-
     const checkSession = async () => {
       try {
         const { data: { session }, error } = await supabase.auth.getSession();
         
-        console.log('[Home] Session check:', { hasSession: !!session, error });
-        
         if (error) {
-          console.error("Session error:", error);
           router.replace("/login");
           return;
         }
 
         if (session) {
-          console.log('[Home] Session found, redirecting to dashboard');
           router.replace("/dashboard");
         } else {
-          console.log('[Home] No session, redirecting to login');
           router.replace("/login");
         }
-      } catch (err) {
-        console.error("Failed to check session:", err);
+      } catch {
         router.replace("/login");
       }
     };

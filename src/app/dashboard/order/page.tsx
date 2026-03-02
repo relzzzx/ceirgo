@@ -185,7 +185,7 @@ export default function OrderPage() {
                                         name="payment"
                                         value="bca"
                                         checked={paymentMethod === 'bca'}
-                                        onChange={(e) => setPaymentMethod(e.target.value as any)}
+                                        onChange={(e) => setPaymentMethod(e.target.value as "bca" | "dana" | "qris")}
                                         className="mt-1"
                                     />
                                     <div className="flex-1">
@@ -212,7 +212,7 @@ export default function OrderPage() {
                                         name="payment"
                                         value="dana"
                                         checked={paymentMethod === 'dana'}
-                                        onChange={(e) => setPaymentMethod(e.target.value as any)}
+                                        onChange={(e) => setPaymentMethod(e.target.value as "bca" | "dana" | "qris")}
                                         className="mt-1"
                                     />
                                     <div className="flex-1">
@@ -239,7 +239,7 @@ export default function OrderPage() {
                                         name="payment"
                                         value="qris"
                                         checked={paymentMethod === 'qris'}
-                                        onChange={(e) => setPaymentMethod(e.target.value as any)}
+                                        onChange={(e) => setPaymentMethod(e.target.value as "bca" | "dana" | "qris")}
                                         className="mt-1"
                                     />
                                     <div className="flex-1">
@@ -266,6 +266,7 @@ export default function OrderPage() {
                                         </button>
                                     </div>
                                     <div className="bg-white p-4 rounded-lg flex items-center justify-center">
+                                        {/* eslint-disable-next-line @next/next/no-img-element */}
                                         <img 
                                             src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200' width='150' height='150'%3E%3Crect width='200' height='200' fill='white'/%3E%3Crect x='20' y='20' width='50' height='50' fill='black'/%3E%3Crect x='25' y='25' width='40' height='40' fill='white'/%3E%3Crect x='30' y='30' width='30' height='30' fill='black'/%3E%3Crect x='130' y='20' width='50' height='50' fill='black'/%3E%3Crect x='135' y='25' width='40' height='40' fill='white'/%3E%3Crect x='140' y='30' width='30' height='30' fill='black'/%3E%3Crect x='20' y='130' width='50' height='50' fill='black'/%3E%3Crect x='25' y='135' width='40' height='40' fill='white'/%3E%3Crect x='30' y='140' width='30' height='30' fill='black'/%3E%3Crect x='80' y='80' width='40' height='40' fill='black'/%3E%3C/svg%3E" 
                                             alt="QRIS Code" 

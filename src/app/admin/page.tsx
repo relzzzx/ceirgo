@@ -53,7 +53,6 @@ export default function AdminPage() {
     const [orders, setOrders] = useState<Order[]>([]);
     const [loading, setLoading] = useState(true);
     const [actionLoading, setActionLoading] = useState<string | null>(null);
-    const [selectedOrder, setSelectedOrder] = useState<Order | null>(null);
     const hasChecked = useRef(false);
 
     const fetchOrders = useCallback(async () => {
@@ -85,8 +84,7 @@ export default function AdminPage() {
                     return;
                 }
                 await fetchOrders();
-            } catch (err) {
-                console.error("Admin check error:", err);
+            } catch {
                 router.replace("/login");
             }
         };
