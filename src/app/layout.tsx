@@ -11,6 +11,10 @@ const inter = Inter({
 export const metadata: Metadata = {
   title: "CEIRGO — Roaming Activation Service",
   description: "Temporary 90-day roaming activation for overseas mobile devices",
+  icons: {
+    icon: "../favicon.svg",
+  }
+
 };
 
 export default function RootLayout({
